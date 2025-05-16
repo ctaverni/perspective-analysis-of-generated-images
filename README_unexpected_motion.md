@@ -22,12 +22,6 @@ Install dependencies with:
 pip install opencv-python numpy matplotlib
 ```
 
-To enable heatmap overlays:
-
-```bash
-pip install seaborn
-```
-
 You'll also need:
 - `yolov3.weights` – https://pjreddie.com/media/files/yolov3.weights
 - `yolov3.cfg` – https://github.com/pjreddie/darknet/blob/master/cfg/yolov3.cfg
