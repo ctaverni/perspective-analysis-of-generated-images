@@ -6,15 +6,15 @@ This project analyzes movement in a video using a combination of:
 - **Heatmaps and trajectory plots** for visualizing movement
 - **Semantic reasoning** to detect unexpected motion (e.g., a "chair" that moves)
 
-## 📦 Features
+## Features
 
-- 🧠 Detects objects frame-by-frame using YOLOv3
-- 🎯 Tracks feature points using optical flow
-- 🔥 Builds a motion intensity heatmap over the video
-- 🧭 Plots individual motion trajectories for tracked points
-- 🚨 Flags "unexpected motion" based on semantic labels (e.g. static objects shouldn't move)
+- Detects objects frame-by-frame using YOLOv3
+- Tracks feature points using optical flow
+- Builds a motion intensity heatmap over the video
+- Plots individual motion trajectories for tracked points
+- Flags "unexpected motion" based on semantic labels (e.g. static objects shouldn't move)
 
-## 📁 Requirements
+## Requirements
 
 Install dependencies with:
 
@@ -33,12 +33,12 @@ You'll also need:
 - `yolov3.cfg` – https://github.com/pjreddie/darknet/blob/master/cfg/yolov3.cfg
 - `coco.names` (or use built-in class list)
 
-## 🎥 Input
+## Input
 
 - Place your input video as `cube.mp4` (or modify the filename in the code).
 - The script processes the video frame by frame.
 
-## 🚀 How It Works
+## How It Works
 
 1. **Detect objects** in each frame using YOLOv3.
 2. **Track feature points** between frames with optical flow.
@@ -52,7 +52,7 @@ You'll also need:
    - An overlaid heatmap on the final video frame
    - Console logs for any anomalous motion
 
-## 🧠 "Unexpected Motion" Logic
+## "Unexpected Motion" Logic
 
 ```python
 static_classes = {"chair", "tvmonitor", "bed", "sofa", "toilet"}
@@ -61,32 +61,25 @@ dynamic_classes = {"person", "car", "dog", "bicycle", "motorbike", ...}
 
 If a static-class object contains more than `3` moving feature points inside its bounding box, it's flagged.
 
-## 📊 Example Output
+## Example Output
 
 - `Moving Points Trajectory` – plots all tracked points over time
 - `Motion Intensity Heatmap` – shows regions of high motion
 - `Overlayed Heatmap` – superimposes the heatmap on a video frame
 - Console output:
   ```
-  ⚠️ Unexpected motion detected in 'chair' at (123, 220) with score: 7
+  Unexpected motion detected in 'chair' at (123, 220) with score: 7
   ```
 
-## 📌 Notes
+## Notes
 
 - Adjust frame resolution inside the script if your video isn't 640x480.
 - You can increase `maxCorners` or tune `qualityLevel` for more/less optical flow points.
 - The threshold for "unexpected motion" can be adjusted in the code.
 
-## 📷 Sample Frame (if included)
+## Sample Frame (if included)
 
 _Add a screenshot or video overlay here if needed._
 
-## 🧪 Future Ideas
 
-- Track per-object trajectories separately
-- Add scene-type awareness (e.g. street, kitchen)
-- Export logs as CSV or JSON
 
-## 📄 License
-
-MIT – feel free to use and adapt.
