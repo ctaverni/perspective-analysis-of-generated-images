@@ -24,6 +24,7 @@ pip install opencv-python numpy matplotlib
 
 You'll also need:
 - `yolov3.weights` – https://pjreddie.com/media/files/yolov3.weights
+  or from https://drive.google.com/file/d/13_l_WoDjydzhnGnm2NmoTuMO_b9EjOYc/view?usp=sharing
 - `yolov3.cfg` – https://github.com/pjreddie/darknet/blob/master/cfg/yolov3.cfg
 - `coco.names` (or use built-in class list)
 
