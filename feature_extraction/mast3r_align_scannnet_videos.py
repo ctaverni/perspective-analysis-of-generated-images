@@ -266,10 +266,10 @@ def windowed_align(sparse_ga, window_size=1, outdir="./outputs"):
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--scene_graph", type=str, default="swin-10-noncyclic")
-    # Scannet++ is 60fps so this is 2fps
-    parser.add_argument("--img_freq", type=int, default=30)
-    # This is 15 seconds of video then
-    parser.add_argument("--max_n_frames", type=int, default=30)
+    # Scannet++ is 60fps so this is 10fps
+    parser.add_argument("--img_freq", type=int, default=6)
+    # This is 6 seconds of video then
+    parser.add_argument("--max_n_frames", type=int, default=60)
     parser.add_argument("--align_window_size", type=int, default=10)
     parser.add_argument(
         "--outdir", type=str, default="/scratch/toskov/data/geom_align_outputs/"
@@ -331,6 +331,9 @@ if __name__ == "__main__":
         pl.ylabel("Mean distance")
         pl.grid()
         pl.savefig(os.path.join(outdir, "mean_distance.png"))
+        pl.close()
+
+        print("Mean error:", mean_array.mean())
 
         # Dump metrics
         metrics_path = os.path.join(outdir, "metrics.pth")
