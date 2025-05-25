@@ -4,8 +4,12 @@
 
 # pipe = LTXPipeline.from_pretrained("Lightricks/LTX-Video", torch_dtype=torch.bfloat16).to("cuda")
 
+import os
+import time
+
 import torch
-from diffusers import BitsAndBytesConfig as DiffusersBitsAndBytesConfig, HunyuanVideoTransformer3DModel, HunyuanVideoPipeline
+from diffusers import BitsAndBytesConfig as DiffusersBitsAndBytesConfig
+from diffusers import HunyuanVideoPipeline, HunyuanVideoTransformer3DModel
 from diffusers.utils import export_to_video
 
 quant_config = DiffusersBitsAndBytesConfig(load_in_8bit=True)
@@ -24,7 +28,7 @@ pipe = HunyuanVideoPipeline.from_pretrained(
 ).to("cuda")
 
 
-prompt = "Video of the inside of a home, quickly moving through the different rooms, clear, fast, dynamic, unblurred, smooth"
+prompt = "Video of the inside of a home, quickly moving through the different rooms, clear, fast, dynamic"
 # negative_prompt = "worst quality, motion, blurry, jittery, distorted, dynamic"
 negative_prompt = ""
 
@@ -36,4 +40,19 @@ video = pipe(
     num_frames=168,
     num_inference_steps=50,
 ).frames[0]
-export_to_video(video, f'output_hunyuan_"{prompt}".mp4', fps=24)
+
+path_to_save = "/scratch/toskov/geometry_consistency/gen_videos/"
+if not os.path.exists(path_to_save):
+    os.makedirs(path_to_save)
+n_existing_vids = len(os.listdir(path_to_save))
+
+# Get current timestamp to avoid overwriting
+current_time = time.time_ns()
+
+vid_path = os.path.join(
+    path_to_save,
+    f"video_{n_existing_vids + 1}_time_{current_time}_hunyuan_'{prompt.replace(' ', '-')}'_.mp4",
+)
+
+
+export_to_video(video, vid_path, fps=24)
