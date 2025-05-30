@@ -84,11 +84,11 @@ RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && locale-gen
 # Configure user and group
 #################################################
 # CHANGE THIS PART ACCORDINGLY !!!
-ENV SHELL=/bin/bash \
-    NB_USER=toskov \
-    NB_UID=271840 \
-    NB_GROUP=vilab \
-    NB_GID=11157
+# ENV SHELL=/bin/bash \
+#     NB_USER= \
+#     NB_UID= \
+#     NB_GROUP= \
+#     NB_GID=
 #################################################
 
 ENV HOME=/home/$NB_USER
@@ -169,10 +169,6 @@ RUN cp feature_extraction/pyproject_for_dust3r.toml mast3r/dust3r/pyproject.toml
 
 WORKDIR $HOME/perspective-analysis-of-generated-images/mast3r
 
-# RUN pip install -r requirements.txt
-# RUN pip install -r dust3r/requirements.txt
-# RUN pip install -r dust3r/requirements_optional.txt
-
 RUN pip install -e .
 RUN pip install -e ./dust3r
 
@@ -188,7 +184,3 @@ RUN git clone https://github.com/jenicek/asmk \
 
 RUN echo "" >> ~/.bashrc; echo "" >> ~/.bashrc; echo "export PATH=/usr/local/cuda-12.4/bin${PATH:+:${PATH}}" >> ~/.bashrc; echo "export LD_LIBRARY_PATH=/usr/local/cuda-12.4/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}" >> ~/.bashrc
 
-
-# RUN cd dust3r/croco/models/curope/ \
-#   && python3 setup.py build_ext --inplace \
-#   && cd ../../../../
