@@ -152,6 +152,13 @@ RUN pip install \
 
 RUN pip install faiss-cpu asmk ipython ipykernel open3d
 
+RUN pip install \
+  diffusers \
+  transformers \
+  accelerate \
+  bitsandbytes \
+  imageio-ffmpeg
+
 # You need to be building from within the git repo cloned locally for this to work
 COPY --chown=$NB_USER . $HOME/perspective-analysis-of-generated-images/
 
