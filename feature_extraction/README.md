@@ -1,4 +1,4 @@
-# Running these scripts
+# Method 2: Measuring inconsistency in the 3D projection of matching pixels
 
 ## Setup
 
